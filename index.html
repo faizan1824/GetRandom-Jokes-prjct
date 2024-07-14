@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laugh House: Makes you Laugh</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="main_container">
+        <h2>Joke Of The Day</h4>
+            <section class="display_Joke"></section>
+            <div class="container">
+                <button id="button">Get Another Joke</button>
+            </div>
+
+    </div>
+    <script>
+        displayJoke = document.querySelector(".display_Joke");
+        const fetchData = async () => {
+            try {
+                const response = await fetch("https://icanhazdadjoke.com/", {
+                    // method: 'GET', /////optional in Getting
+                    headers: {
+                        Accept: 'application/json',
+                    }
+                });
+                // console.log(response);
+                const data = await response.json();
+                console.log(data.joke);
+                displayJoke.innerHTML = data.joke
+            } catch (err) {
+                err = "Can't fetch Jokes";
+                console.log(err);
+                displayJoke.innerHTML = err
+            }
+
+
+        }
+
+
+
+
+
+
+        fetchData()
+        document.getElementById("button").addEventListener("click", fetchData);
+    </script>
+</body>
+
+</html>
